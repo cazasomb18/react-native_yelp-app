@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import yelp from '../api/yelp';
 
-export default = () => {
+export default () => {
 	const [restaurants, setResults] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const searchApi = async (seachTerm) => {
-		console.log('wtf you wanna eat?!');
+	const searchApi = async searchTerm => {
+		console.log('Whachu wanna eat?!');
 		try {
 			const response = await yelp.get('/search', {
 				params: {
@@ -16,15 +16,15 @@ export default = () => {
 				}
 			});
 			setResults(response.data.businesses);
-		} catch(err) {
-			setErrorMessage('Oh no! Something went wrong!')
+		} catch (err) {
+			setErrorMessage('Oh no! Something went wrong!');
 		}
 	};
 
-	//Call searchApi when component is first rendered is BAD CODE
+	// Call searchApi when component first rendered is BAD CODE!
 
-	useEffect(()=>  {
-		searchApi('pasta');
+	useEffect(() => {
+		searchApi('fried chicken');
 	}, []);
 
 	return [searchApi, restaurants, errorMessage];
